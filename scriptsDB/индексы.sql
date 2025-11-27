@@ -1,0 +1,10 @@
+CREATE INDEX idx_record_catalog_number ON shem.record(catalog_number);
+CREATE INDEX idx_record_title ON shem.record(title);
+CREATE INDEX idx_compositions_title ON shem.compositions(title);
+CREATE INDEX idx_musicians_name ON shem.musicians(last_name, first_name);
+CREATE INDEX idx_ensembles_name ON shem.ensembles(name);
+CREATE INDEX idx_purchases_date ON shem.purchases(purchase_date);
+CREATE INDEX idx_customers_phone ON shem.customers(phone);
+CREATE INDEX idx_customers_name ON shem.customers(last_name, first_name);
+CREATE INDEX idx_employees_name ON shem.employees(last_name, first_name);
+CREATE INDEX idx_record_sales_date ON shem.record_sales(id_record, sale_date);
