@@ -1,0 +1,1 @@
+SELECT * FROM shem.get_ensemble_compositions_count('The Beatles');

@@ -1,0 +1,1 @@
+SELECT * FROM shem.musicians_with_roles;

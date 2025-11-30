@@ -1,0 +1,1 @@
+SELECT * FROM shem.record_sales_stats;
