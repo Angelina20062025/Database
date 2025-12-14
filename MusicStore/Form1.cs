@@ -15,7 +15,7 @@ namespace MusicStore
     public partial class Form1 : Form
     {
         private NpgsqlConnection conn;
-        private string currentUserRole = "guest"; // гость, продавец, админ
+        private string currentUserRole = "guest"; //гость, продавец, админ
         private int currentUserId = -1;
         public Form1()
         {
@@ -34,13 +34,14 @@ namespace MusicStore
         {
             //видимость элементов в зависимости от роли
             btnLogin.Text = currentUserRole == "guest" ? "Авторизоваться" : "Выйти";
-            btnManageUsers.Visible = (currentUserRole == "admin");
-            btnAddRecord.Visible = (currentUserRole == "admin" || currentUserRole == "seller");
-            btnEditRecord.Visible = (currentUserRole == "admin" || currentUserRole == "seller");
+            btnAddRecord.Visible = (currentUserRole == "admin");
+            btnEditRecord.Visible = (currentUserRole == "admin");
             btnDeleteRecord.Visible = (currentUserRole == "admin");
+            btnArcRecord.Visible = (currentUserRole == "admin");
+            btnEnsembles.Visible = (currentUserRole == "admin");
             btnSell.Visible = (currentUserRole == "seller");
             btnReserve.Visible = (currentUserRole == "seller");
-            btnViewReservations.Visible = (currentUserRole == "seller" || currentUserRole == "admin");
+            btnViewReservations.Visible = (currentUserRole == "seller");
 
             if (currentUserRole == "admin")
             {
@@ -68,12 +69,11 @@ namespace MusicStore
                 //публичный доступ к каталогу пластинок
                 DataSet ds = new DataSet();
                 NpgsqlCommand cmd = new NpgsqlCommand(
-                "SELECT r.catalog_number as \"Название_каталога\", " +
+                "SELECT r.id_record, r.catalog_number as \"Название_каталога\", " +
                 "r.title as \"Название_диска\", " +
                 "r.release_date as \"Дата_выпуска\", " +
                 "r.retail_price as \"Цена_(руб.)\", " +
-                "r.remaining_quantity as \"В_наличии_(шт.)\", " +
-                "r.description as \"Описание\" " +
+                "r.remaining_quantity as \"В_наличии_(шт.)\" " +
                 "FROM shem.record r " +
                 "WHERE r.remaining_quantity > 0 " +
                 "ORDER BY r.title", conn);
@@ -88,6 +88,7 @@ namespace MusicStore
                 }
 
                 dataGridView1.DataSource = ds.Tables["records"];
+                dataGridView1.Columns["id record"].Visible = false;
                 conn.Close();
             }
             catch (Exception ex)
@@ -136,13 +137,12 @@ namespace MusicStore
 
                 //каталог для администратора
                 NpgsqlCommand cmd = new NpgsqlCommand(
-                    "SELECT r.catalog_number as \"Название_каталога\", " +
+                    "SELECT r.id_record, r.catalog_number as \"Название_каталога\", " +
                     "r.title as \"Название_диска\", r.release_date as \"Дата_выпуска_\", " +
                     "r.wholesale_price as \"Оптовая_цена_(руб.)\", r.retail_price as \"Розничная_цена_(руб.)\", " +
-                    "r.remaining_quantity as \"Количество_в_наличии_(шт.)\", " +
-                    "r.description as \"Описание_\" " +
+                    "r.remaining_quantity as \"Количество_в_наличии_(шт.)\" " +
                     "FROM shem.record r " +
-                    "ORDER BY r.title", conn);
+                    "ORDER BY r.is_deleted", conn);
 
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
                 da.Fill(ds, "records");
@@ -151,8 +151,9 @@ namespace MusicStore
                 {
                     column.ColumnName = column.ColumnName.Replace("_", " ");
                 }
-
+                
                 dataGridView1.DataSource = ds.Tables["records"];
+                dataGridView1.Columns["id record"].Visible = false;
                 conn.Close();
             }
             catch (Exception ex)
@@ -163,53 +164,54 @@ namespace MusicStore
 
         private void btnAddRecord_Click(object sender, EventArgs e)
         {
-            //AddRecordForm addForm = new AddRecordForm();
-            //addForm.ShowDialog();
-            //LoadDetailedCatalog();
+            AddRecordForm addForm = new AddRecordForm();
+            addForm.ShowDialog();
+            LoadDetailedCatalog();
         }
 
         private void btnEditRecord_Click(object sender, EventArgs e)
         {
-            //if (dataGridView1.CurrentRow != null)
-            //{
-            //    int recordId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id_record"].Value);
-            //    EditRecordForm editForm = new EditRecordForm(recordId);
-            //    editForm.ShowDialog();
-            //    LoadDetailedCatalog();
-            //}
+            if (dataGridView1.CurrentRow != null)
+            {
+                int recordId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id record"].Value);
+                EditRecordForm editForm = new EditRecordForm(recordId);
+                editForm.ShowDialog();
+                LoadDetailedCatalog();
+            }
         }
 
         private void btnDeleteRecord_Click(object sender, EventArgs e)
         {
-            //if (dataGridView1.CurrentRow != null)
-            //{
-            //    int recordId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id_record"].Value);
+            if (dataGridView1.CurrentRow != null)
+            {
+                int recordId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id record"].Value);
 
-            //    DialogResult result = MessageBox.Show(
-            //        "Вы уверены, что хотите удалить эту запись?",
-            //        "Подтверждение удаления",
-            //        MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show(
+                    "Вы уверены, что хотите удалить эту пластинку, а также записи о её покупках и бронированиях?",
+                    "Подтверждение удаления",
+                    MessageBoxButtons.YesNo);
 
-            //    if (result == DialogResult.Yes)
-            //    {
-            //        try
-            //        {
-            //            conn.Open();
-            //            NpgsqlCommand cmd = new NpgsqlCommand(
-            //                "DELETE FROM shem.record WHERE id_record = @id", conn);
-            //            cmd.Parameters.AddWithValue("id", recordId);
-            //            cmd.ExecuteNonQuery();
-            //            conn.Close();
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        conn.Open();
+                        NpgsqlCommand cmd = new NpgsqlCommand(
+                            "CALL shem.delete_record(@id)", conn);
+                        cmd.Parameters.AddWithValue("id", recordId);
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
 
-            //            MessageBox.Show("Запись удалена успешно");
-            //            LoadDetailedCatalog();
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            MessageBox.Show("Ошибка удаления: " + ex.Message);
-            //        }
-            //    }
-            //}
+                        MessageBox.Show("Запись удалена успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadDetailedCatalog();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ошибка удаления: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        conn.Close();
+                    }
+                }
+            }
         }
 
         private void btnSell_Click(object sender, EventArgs e)
@@ -219,7 +221,7 @@ namespace MusicStore
                 int employeeId = GetEmployeeId(currentUserId);
                 SellRecordForm sellForm = new SellRecordForm(employeeId);
                 sellForm.ShowDialog();
-                LoadDetailedCatalog();
+                LoadInitialData();
             }
         }
 
@@ -251,18 +253,14 @@ namespace MusicStore
             int employeeId = GetEmployeeId(currentUserId);
             ReserveRecordForm reserveForm = new ReserveRecordForm(employeeId);
             reserveForm.ShowDialog();
-        }
-
-        private void btnManageUsers_Click(object sender, EventArgs e)
-        {
-            //ManageUsersForm usersForm = new ManageUsersForm();
-            //usersForm.ShowDialog();
+            LoadInitialData();
         }
 
         private void btnViewReservations_Click(object sender, EventArgs e)
         {
-            //ReservationsForm reservationsForm = new ReservationsForm();
-            //reservationsForm.ShowDialog();
+            ReservationsForm reservationsForm = new ReservationsForm();
+            reservationsForm.ShowDialog();
+            LoadInitialData();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -289,7 +287,7 @@ namespace MusicStore
 
                 if (ds.Tables["search_results"].Columns.Count > 0)
                 {
-                    ds.Tables["search_results"].Columns["cd_id"].ColumnName = "ID";
+                    ds.Tables["search_results"].Columns["cd_id"].ColumnName = "id record";
                     ds.Tables["search_results"].Columns["title"].ColumnName = "Название диска";
                     ds.Tables["search_results"].Columns["catalog_number"].ColumnName = "Название каталога";
                     ds.Tables["search_results"].Columns["ensemble_name"].ColumnName = "Ансамбль";
@@ -299,7 +297,7 @@ namespace MusicStore
                 }
 
                 dataGridView1.DataSource = ds.Tables["search_results"];
-                dataGridView1.Columns["ID"].Visible = false;
+                dataGridView1.Columns["id record"].Visible = false;
                 conn.Close();
             }
             catch (Exception ex)
@@ -321,6 +319,7 @@ namespace MusicStore
 
                 if (ds.Tables["leaders"].Columns.Count > 0)
                 {
+                    ds.Tables["leaders"].Columns["id_record"].ColumnName = "id record";
                     ds.Tables["leaders"].Columns["cd_title"].ColumnName = "Название диска";
                     ds.Tables["leaders"].Columns["catalog_number"].ColumnName = "Название каталога";
                     ds.Tables["leaders"].Columns["current_year"].ColumnName = "Продано в этом году (шт.)";
@@ -330,6 +329,7 @@ namespace MusicStore
                 }
 
                 dataGridView1.DataSource = ds.Tables["leaders"];
+                dataGridView1.Columns["id record"].Visible = false;
                 if (currentUserRole != "admin")
                 {
                     dataGridView1.Columns["Общая выручка (руб.)"].Visible = false;
@@ -345,7 +345,136 @@ namespace MusicStore
 
         private void buttonUpd_Click(object sender, EventArgs e)
         {
-            LoadInitialData();
+            if (currentUserRole == "admin")
+            {
+                LoadDetailedCatalog();
+            }
+            else
+            {
+                LoadInitialData();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                int recordId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id record"].Value);
+                RecordDetailsForm detailsForm = new RecordDetailsForm(recordId);
+                detailsForm.ShowDialog();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            EnsembleStatsForm statsForm = new EnsembleStatsForm();
+            statsForm.ShowDialog();
+        }
+
+        private void butSrchAns_Click(object sender, EventArgs e)
+        {
+            string searchTerm = textBox1.Text.Trim();
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                SearchRecordsAns(searchTerm);
+            }
+        }
+
+        private void SearchRecordsAns(string searchTerm)
+        {
+            try
+            {
+                conn.Open();
+                DataSet ds = new DataSet();
+
+                NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM shem.search_cds_by_ensemble(@search)", conn);
+                cmd.Parameters.AddWithValue("search", searchTerm);
+
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+                da.Fill(ds, "search_results");
+
+                if (ds.Tables["search_results"].Columns.Count > 0)
+                {
+                    ds.Tables["search_results"].Columns["cd_id"].ColumnName = "id record";
+                    ds.Tables["search_results"].Columns["title"].ColumnName = "Название диска";
+                    ds.Tables["search_results"].Columns["catalog_number"].ColumnName = "Название каталога";
+                    ds.Tables["search_results"].Columns["ensemble_name"].ColumnName = "Ансамбль";
+                    ds.Tables["search_results"].Columns["release_date"].ColumnName = "Дата выпуска";
+                    ds.Tables["search_results"].Columns["retail_price"].ColumnName = "Цена (руб.)";
+                    ds.Tables["search_results"].Columns["remaining_quantity"].ColumnName = "В наличиим (шт.)";
+                }
+
+                dataGridView1.DataSource = ds.Tables["search_results"];
+                dataGridView1.Columns["id record"].Visible = false;
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка поиска: " + ex.Message);
+            }
+        }
+
+        private void btnArcRecord_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                int recordId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id record"].Value);
+
+                DialogResult result = MessageBox.Show(
+                    "Вы уверены, что хотите архивировать эту запись?",
+                    "Подтверждение архивации",
+                    MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        conn.Open();
+                        NpgsqlCommand cmd = new NpgsqlCommand(
+                            "SELECT * FROM shem.soft_delete_record(@id)", conn);
+                        cmd.Parameters.AddWithValue("id", recordId);
+
+                        using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                bool success = reader.GetBoolean(0);
+                                string message = reader.GetString(1);
+                                int activeReservations = reader.GetInt32(2);
+                                int totalSales = reader.GetInt32(3);
+                                int performancesCount = reader.GetInt32(4);
+
+                                if (success)
+                                {
+                                    MessageBox.Show(message, "Архивация успешна",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show(message, "Невозможно архивировать",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    conn.Close();
+                                    return;
+                                }
+                            }
+                        }
+
+                        conn.Close();
+                        LoadDetailedCatalog();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ошибка архивации: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        conn.Close();
+                    }
+                }
+            }
+        }
+
+        private void btnEnsembles_Click(object sender, EventArgs e)
+        {
+            EnsemblesManagementForm form = new EnsemblesManagementForm();
+            form.ShowDialog();
         }
     }
 }

@@ -130,19 +130,19 @@ namespace MusicStore
         {
             if (cart.Count == 0)
             {
-                MessageBox.Show("Корзина пуста", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Корзина пуста", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (cmbCustomer.SelectedValue == null)
             {
-                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (cmbPaymentMethod.SelectedValue == null)
             {
-                MessageBox.Show("Выберите способ оплаты", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Выберите способ оплаты", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -344,13 +344,13 @@ namespace MusicStore
         {
             if (cmbRecord.SelectedValue == null)
             {
-                MessageBox.Show("Выберите пластинку", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Выберите пластинку", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (numQuantity.Value <= 0)
             {
-                MessageBox.Show("Введите количество", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Введите количество", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -384,7 +384,7 @@ namespace MusicStore
                         }
                         else
                         {
-                            MessageBox.Show("Пластинка не найдена", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Пластинка не найдена", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                     }
@@ -395,7 +395,7 @@ namespace MusicStore
                 //проверка, не превышает ли количество доступное
                 if (quantity > available)
                 {
-                    MessageBox.Show($"Недостаточно пластинок в наличии. Доступно: {available} шт.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Недостаточно пластинок в наличии. Доступно: {available} шт.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -406,7 +406,7 @@ namespace MusicStore
                     //увеличивается количество
                     if (existingItem.Quantity + quantity > available)
                     {
-                        MessageBox.Show($"Недостаточно пластинок в наличии. Уже в корзине: {existingItem.Quantity} шт., доступно: {available} шт.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Недостаточно пластинок в наличии. Уже в корзине: {existingItem.Quantity} шт., доступно: {available} шт.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                     existingItem.Quantity += quantity;
@@ -445,7 +445,7 @@ namespace MusicStore
                 listItem.SubItems.Add(item.Price.ToString("0.00"));
                 listItem.SubItems.Add(item.Quantity.ToString());
                 listItem.SubItems.Add(item.Total.ToString("0.00"));
-                listItem.Tag = item; // Сохраняем ссылку на объект
+                listItem.Tag = item;
                 listViewCart.Items.Add(listItem);
 
                 totalAmount += item.Total;
@@ -457,7 +457,8 @@ namespace MusicStore
             //активируем/деактивируем кнопки
             btnRemoveFromCart.Enabled = (listViewCart.SelectedItems.Count > 0);
             btnClearCart.Enabled = (cart.Count > 0);
-            btnSell.Enabled = (cart.Count > 0 && cmbCustomer.SelectedValue != null);
+            btnSell.Enabled = (cmbCustomer.SelectedValue != null);
+            btnSell.Enabled = (cart.Count > 0);
         }
 
         private void btnRemoveFromCart_Click(object sender, EventArgs e)

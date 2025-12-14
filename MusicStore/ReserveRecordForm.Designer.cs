@@ -32,7 +32,6 @@
             this.dtpExpiryDate = new System.Windows.Forms.DateTimePicker();
             this.cmbRecord = new System.Windows.Forms.ComboBox();
             this.cmbCustomer = new System.Windows.Forms.ComboBox();
-            this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.lblPrice = new System.Windows.Forms.Label();
             this.lblAvailable = new System.Windows.Forms.Label();
             this.numQuantity = new System.Windows.Forms.NumericUpDown();
@@ -42,7 +41,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -53,7 +51,7 @@
             // 
             // dtpReservationDate
             // 
-            this.dtpReservationDate.Location = new System.Drawing.Point(287, 468);
+            this.dtpReservationDate.Location = new System.Drawing.Point(288, 410);
             this.dtpReservationDate.Name = "dtpReservationDate";
             this.dtpReservationDate.Size = new System.Drawing.Size(200, 22);
             this.dtpReservationDate.TabIndex = 0;
@@ -61,7 +59,7 @@
             // 
             // dtpExpiryDate
             // 
-            this.dtpExpiryDate.Location = new System.Drawing.Point(507, 468);
+            this.dtpExpiryDate.Location = new System.Drawing.Point(508, 410);
             this.dtpExpiryDate.Name = "dtpExpiryDate";
             this.dtpExpiryDate.Size = new System.Drawing.Size(200, 22);
             this.dtpExpiryDate.TabIndex = 1;
@@ -83,19 +81,10 @@
             this.cmbCustomer.Size = new System.Drawing.Size(221, 24);
             this.cmbCustomer.TabIndex = 3;
             // 
-            // cmbStatus
-            // 
-            this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(36, 192);
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(220, 24);
-            this.cmbStatus.TabIndex = 4;
-            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
-            // 
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(33, 474);
+            this.lblPrice.Location = new System.Drawing.Point(34, 416);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(0, 16);
             this.lblPrice.TabIndex = 5;
@@ -103,14 +92,14 @@
             // lblAvailable
             // 
             this.lblAvailable.AutoSize = true;
-            this.lblAvailable.Location = new System.Drawing.Point(123, 474);
+            this.lblAvailable.Location = new System.Drawing.Point(124, 416);
             this.lblAvailable.Name = "lblAvailable";
             this.lblAvailable.Size = new System.Drawing.Size(0, 16);
             this.lblAvailable.TabIndex = 6;
             // 
             // numQuantity
             // 
-            this.numQuantity.Location = new System.Drawing.Point(36, 261);
+            this.numQuantity.Location = new System.Drawing.Point(37, 203);
             this.numQuantity.Name = "numQuantity";
             this.numQuantity.Size = new System.Drawing.Size(120, 22);
             this.numQuantity.TabIndex = 8;
@@ -118,7 +107,7 @@
             // 
             // btnReserve
             // 
-            this.btnReserve.Location = new System.Drawing.Point(36, 511);
+            this.btnReserve.Location = new System.Drawing.Point(37, 453);
             this.btnReserve.Name = "btnReserve";
             this.btnReserve.Size = new System.Drawing.Size(124, 43);
             this.btnReserve.TabIndex = 10;
@@ -128,7 +117,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(166, 511);
+            this.btnCancel.Location = new System.Drawing.Point(167, 453);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(120, 43);
             this.btnCancel.TabIndex = 11;
@@ -138,7 +127,7 @@
             // 
             // txtNotes
             // 
-            this.txtNotes.Location = new System.Drawing.Point(36, 333);
+            this.txtNotes.Location = new System.Drawing.Point(37, 275);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(220, 79);
@@ -165,25 +154,16 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 232);
+            this.label3.Location = new System.Drawing.Point(34, 174);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 16);
             this.label3.TabIndex = 15;
             this.label3.Text = "Количество";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 166);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 16);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Статус";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(33, 304);
+            this.label5.Location = new System.Drawing.Point(34, 246);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(175, 16);
             this.label5.TabIndex = 17;
@@ -192,7 +172,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(33, 439);
+            this.label6.Location = new System.Drawing.Point(34, 381);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 16);
             this.label6.TabIndex = 18;
@@ -201,7 +181,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(123, 439);
+            this.label8.Location = new System.Drawing.Point(124, 381);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(139, 16);
             this.label8.TabIndex = 20;
@@ -210,7 +190,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(284, 439);
+            this.label7.Location = new System.Drawing.Point(285, 381);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(155, 16);
             this.label7.TabIndex = 21;
@@ -219,7 +199,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(504, 439);
+            this.label9.Location = new System.Drawing.Point(505, 381);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(145, 16);
             this.label9.TabIndex = 22;
@@ -229,13 +209,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(937, 625);
+            this.ClientSize = new System.Drawing.Size(738, 530);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -245,7 +224,6 @@
             this.Controls.Add(this.numQuantity);
             this.Controls.Add(this.lblAvailable);
             this.Controls.Add(this.lblPrice);
-            this.Controls.Add(this.cmbStatus);
             this.Controls.Add(this.cmbCustomer);
             this.Controls.Add(this.cmbRecord);
             this.Controls.Add(this.dtpExpiryDate);
@@ -265,7 +243,6 @@
         private System.Windows.Forms.DateTimePicker dtpExpiryDate;
         private System.Windows.Forms.ComboBox cmbRecord;
         private System.Windows.Forms.ComboBox cmbCustomer;
-        private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.Label lblAvailable;
         private System.Windows.Forms.NumericUpDown numQuantity;
@@ -275,7 +252,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;

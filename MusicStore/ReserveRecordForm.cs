@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace MusicStore
 {
@@ -22,6 +23,10 @@ namespace MusicStore
             numQuantity.ReadOnly = true;
             connectionString = "Host=localhost; Database=MusicStore; User Id=postgres; Password=123;";
             LoadComboBoxes();
+            dtpReservationDate.MinDate = DateTime.Today;
+            dtpReservationDate.MaxDate = DateTime.Today;
+            dtpExpiryDate.MinDate = DateTime.Today;
+            dtpExpiryDate.MaxDate = DateTime.Today.AddDays(7);
             dtpReservationDate.Value = DateTime.Today;
             dtpExpiryDate.Value = DateTime.Today.AddDays(7);
         }
@@ -57,17 +62,6 @@ namespace MusicStore
                     cmbCustomer.DataSource = dsCustomers.Tables["customers"];
                     cmbCustomer.DisplayMember = "full_name";
                     cmbCustomer.ValueMember = "id_customers";
-
-                    //загрузка статусов бронирования
-                    DataSet dsStatuses = new DataSet();
-                    NpgsqlCommand cmdStatuses = new NpgsqlCommand(
-                        "SELECT status_name FROM shem.reservation_statuses ORDER BY id_status", conn);
-                    NpgsqlDataAdapter daStatuses = new NpgsqlDataAdapter(cmdStatuses);
-                    daStatuses.Fill(dsStatuses, "statuses");
-
-                    cmbStatus.DataSource = dsStatuses.Tables["statuses"];
-                    cmbStatus.DisplayMember = "status_name";
-                    cmbStatus.ValueMember = "status_name";
                 }
             }
             catch (Exception ex)
@@ -139,52 +133,60 @@ namespace MusicStore
             if (!ValidateInput())
                 return;
 
-            try
+            DialogResult result = MessageBox.Show(
+                "Совершить бронирование?",
+                "Подтверждение",
+                MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                using (var conn = new NpgsqlConnection(connectionString))
+                try
                 {
-                    conn.Open();
-
-                    //функция create_reservation из бд
-                    NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM shem.create_reservation(" +
-                        "@customer_id, @employee_id, @record_id, @quantity, @expiry_days, @notes)", conn);
-
-                    cmd.Parameters.AddWithValue("customer_id", (int)cmbCustomer.SelectedValue);
-                    cmd.Parameters.AddWithValue("employee_id", employeeId);
-                    cmd.Parameters.AddWithValue("record_id", (int)cmbRecord.SelectedValue);
-                    cmd.Parameters.AddWithValue("quantity", (int)numQuantity.Value);
-                    cmd.Parameters.AddWithValue("expiry_days", (int)(dtpExpiryDate.Value - dtpReservationDate.Value).TotalDays);
-                    cmd.Parameters.AddWithValue("notes", txtNotes.Text);
-
-                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    using (var conn = new NpgsqlConnection(connectionString))
                     {
-                        if (reader.Read())
+                        conn.Open();
+
+                        //функция create_reservation из бд
+                        NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM shem.create_reservation(" +
+                            "@customer_id, @employee_id, @record_id, @quantity, @expiry_days, @notes)", conn);
+
+                        cmd.Parameters.AddWithValue("customer_id", (int)cmbCustomer.SelectedValue);
+                        cmd.Parameters.AddWithValue("employee_id", employeeId);
+                        cmd.Parameters.AddWithValue("record_id", (int)cmbRecord.SelectedValue);
+                        cmd.Parameters.AddWithValue("quantity", (int)numQuantity.Value);
+                        cmd.Parameters.AddWithValue("expiry_days", (int)(dtpExpiryDate.Value - dtpReservationDate.Value).TotalDays);
+                        cmd.Parameters.AddWithValue("notes", txtNotes.Text);
+
+                        using (NpgsqlDataReader reader = cmd.ExecuteReader())
                         {
-                            int reservationId = reader.GetInt32(reader.GetOrdinal("reservation_id"));
-                            string customerName = reader.GetString(reader.GetOrdinal("customer_name"));
-                            string recordTitle = reader.GetString(reader.GetOrdinal("record_title"));
-                            int quantity = reader.GetInt32(reader.GetOrdinal("quantity"));
-                            DateTime expiryDate = reader.GetDateTime(reader.GetOrdinal("expiry_date"));
+                            if (reader.Read())
+                            {
+                                int reservationId = reader.GetInt32(reader.GetOrdinal("reservation_id"));
+                                string customerName = reader.GetString(reader.GetOrdinal("customer_name"));
+                                string recordTitle = reader.GetString(reader.GetOrdinal("record_title"));
+                                int quantity = reader.GetInt32(reader.GetOrdinal("quantity"));
+                                DateTime expiryDate = reader.GetDateTime(reader.GetOrdinal("expiry_date"));
 
-                            MessageBox.Show($"Бронь успешно создана.\n\n" +
-                                          $"Номер брони: {reservationId}\n" +
-                                          $"Клиент: {customerName}\n" +
-                                          $"Пластинка: {recordTitle}\n" +
-                                          $"Количество: {quantity} шт.\n" +
-                                          $"Действительна до: {expiryDate:dd.MM.yyyy}",
-                                          "Бронь создана",
-                                          MessageBoxButtons.OK,
-                                          MessageBoxIcon.Information);
+                                MessageBox.Show($"Бронирование успешно создано\n\n" +
+                                              $"Номер брони: {reservationId}\n" +
+                                              $"Покупатель: {customerName}\n" +
+                                              $"Пластинка: {recordTitle}\n" +
+                                              $"Количество: {quantity} шт.\n" +
+                                              $"Действительна до: {expiryDate:dd.MM.yyyy}",
+                                              "Бронирование создано",
+                                              MessageBoxButtons.OK,
+                                              MessageBoxIcon.Information);
 
-                            this.DialogResult = DialogResult.OK;
-                            this.Close();
+                                this.DialogResult = DialogResult.OK;
+                                this.Close();
+                            }
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка: {ex.Message}");
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка: {ex.Message}");
+                }
             }
         }
 
