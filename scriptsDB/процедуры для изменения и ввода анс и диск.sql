@@ -1,6 +1,7 @@
 --для изменения данных о компакт-дисках
 CREATE OR REPLACE PROCEDURE shem.update_cd_info(
     p_id_record INTEGER,
+	p_catalog_number VARCHAR(50) DEFAULT NULL,
     p_title VARCHAR(200) DEFAULT NULL,
     p_release_date DATE DEFAULT NULL,
     p_wholesale_price NUMERIC(10,2) DEFAULT NULL,
@@ -13,6 +14,7 @@ AS $$
 BEGIN
     UPDATE shem.record 
     SET 
+		catalog_number = COALESCE(p_catalog_number, catalog_number),
         title = COALESCE(p_title, title),
         release_date = COALESCE(p_release_date, release_date),
         wholesale_price = COALESCE(p_wholesale_price, wholesale_price),

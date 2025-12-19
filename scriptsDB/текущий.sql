@@ -7,6 +7,11 @@ VALUES (2, 3, '2024-10-08', 2);
 INSERT INTO shem.purchase_details (id_purchases, id_record, quantity, unit_price)
 VALUES (2, 3, 1, 799.00);
 
+INSERT INTO shem.purchase_details (id_purchases, id_record, quantity, unit_price)
+VALUES (6, 6, 1, 899.00);
+
+SELECT * FROM shem.record_sales_stats;
+
 select * from shem.purchases
 select * from shem.purchase_details
 select * from shem.payment_methods
@@ -15,3 +20,5 @@ select * from shem.customers
 select * from shem.reservation_statuses
 select * from shem.reservations
 select * from shem.musicians
+select * from shem.users
+select * from shem.employees

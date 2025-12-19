@@ -2,7 +2,15 @@
 CREATE OR REPLACE FUNCTION shem.complete_reservation(
     p_reservation_id INTEGER
 ) RETURNS VOID AS $$
+DECLARE
+    v_record_id INTEGER;
+    v_quantity INTEGER;
 BEGIN
+	SELECT id_record, quantity 
+    INTO v_record_id, v_quantity
+    FROM shem.reservations 
+    WHERE id_reservations = p_reservation_id AND status = 'Активно';
+	
     UPDATE shem.reservations 
     SET status = 'Завершено'
     WHERE id_reservations = p_reservation_id AND status = 'Активно';
@@ -10,6 +18,10 @@ BEGIN
     IF NOT FOUND THEN
         RAISE EXCEPTION 'Бронь не найдена или уже не активна';
     END IF;
+
+	UPDATE shem.record 
+    SET remaining_quantity = remaining_quantity + v_quantity
+    WHERE id_record = v_record_id;
 END;
 $$ LANGUAGE plpgsql;
 

@@ -2,6 +2,7 @@ CREATE OR REPLACE FUNCTION shem.get_sales_leaders(
     p_limit INTEGER DEFAULT 10
 )
 RETURNS TABLE(
+	id_record INTEGER,
     cd_title VARCHAR(200),
     catalog_number VARCHAR(50),
     current_year INTEGER,
@@ -14,6 +15,7 @@ AS $$
 BEGIN
     RETURN QUERY
     SELECT 
+		rss.id_record,
         rss.title,
         rss.catalog_number,
         rss.current_year_sales::INTEGER as current_year,
