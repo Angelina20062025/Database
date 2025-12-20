@@ -69,7 +69,6 @@ namespace MusicStore
                         UserId = reader.GetInt32(reader.GetOrdinal("id_users"));
                         string role = reader.GetString(reader.GetOrdinal("role_name"));
 
-                        //уровень доступа
                         if (role.ToLower() == "администратор")
                             UserRole = "admin";
                         else if (role.ToLower() == "продавец")

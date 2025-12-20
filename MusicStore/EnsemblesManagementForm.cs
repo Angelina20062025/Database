@@ -33,6 +33,7 @@ namespace MusicStore
                     "e.founded_date as \"Дата_основания\", e.description as \"Описание\"" +
                     "FROM shem.ensembles e " +
                     "JOIN shem.ensemble_types et ON e.id_ensemble_types = et.id_ensemble_types " +
+                    "WHERE e.is_deleted = false " +
                     "ORDER BY e.name", conn);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
                 da.Fill(ds, "ensembles");
@@ -89,17 +90,37 @@ namespace MusicStore
                     {
                         conn.Open();
                         NpgsqlCommand cmd = new NpgsqlCommand(
-                            "DELETE FROM shem.ensembles WHERE id_ensembles = @id", conn);
+                            "SELECT * FROM shem.soft_delete_ensemble(@id)", conn);
                         cmd.Parameters.AddWithValue("id", ensembleId);
-                        cmd.ExecuteNonQuery();
+
+                        using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                bool success = reader.GetBoolean(0);
+                                string message = reader.GetString(1);
+
+                                if (success)
+                                {
+                                    MessageBox.Show(message, "Архивация успешна",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show(message, "Невозможно архивировать",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    conn.Close();
+                                    return;
+                                }
+                            }
+                        }
+
                         conn.Close();
-                        MessageBox.Show("Ансамбль удален", "Сообщение", MessageBoxButtons.OK,
-                                      MessageBoxIcon.Information);
                         LoadEnsembles();
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Ошибка: " + ex.Message);
+                        MessageBox.Show("Ошибка архивации: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         conn.Close();
                     }
                 }

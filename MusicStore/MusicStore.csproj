@@ -92,17 +92,53 @@
     <Compile Include="AddRecordForm.Designer.cs">
       <DependentUpon>AddRecordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CompositionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompositionsForm.Designer.cs">
+      <DependentUpon>CompositionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomersForm.Designer.cs">
+      <DependentUpon>CustomersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersFormSeller.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomersFormSeller.Designer.cs">
+      <DependentUpon>CustomersFormSeller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditCustomersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCustomersForm.Designer.cs">
+      <DependentUpon>EditCustomersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditEnsembleForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditEnsembleForm.Designer.cs">
       <DependentUpon>EditEnsembleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditMusicianForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditMusicianForm.Designer.cs">
+      <DependentUpon>EditMusicianForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditRecordForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditRecordForm.Designer.cs">
       <DependentUpon>EditRecordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeesForm.Designer.cs">
+      <DependentUpon>EmployeesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="EnsemblesManagementForm.cs">
       <SubType>Form</SubType>
@@ -127,6 +163,12 @@
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MusiciansForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MusiciansForm.Designer.cs">
+      <DependentUpon>MusiciansForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -160,11 +202,29 @@
     <EmbeddedResource Include="AddRecordForm.resx">
       <DependentUpon>AddRecordForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CompositionsForm.resx">
+      <DependentUpon>CompositionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomersForm.resx">
+      <DependentUpon>CustomersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomersFormSeller.resx">
+      <DependentUpon>CustomersFormSeller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCustomersForm.resx">
+      <DependentUpon>EditCustomersForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditEnsembleForm.resx">
       <DependentUpon>EditEnsembleForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditMusicianForm.resx">
+      <DependentUpon>EditMusicianForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditRecordForm.resx">
       <DependentUpon>EditRecordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmployeesForm.resx">
+      <DependentUpon>EmployeesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EnsemblesManagementForm.resx">
       <DependentUpon>EnsemblesManagementForm.cs</DependentUpon>
@@ -177,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MusiciansForm.resx">
+      <DependentUpon>MusiciansForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

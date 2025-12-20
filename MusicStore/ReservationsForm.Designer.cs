@@ -34,6 +34,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.butUpd = new System.Windows.Forms.Button();
             this.btnExpireOld = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReservations)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,16 +42,16 @@
             // 
             this.dataGridViewReservations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewReservations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewReservations.Location = new System.Drawing.Point(48, 40);
+            this.dataGridViewReservations.Location = new System.Drawing.Point(45, 72);
             this.dataGridViewReservations.Name = "dataGridViewReservations";
             this.dataGridViewReservations.RowHeadersWidth = 51;
             this.dataGridViewReservations.RowTemplate.Height = 24;
-            this.dataGridViewReservations.Size = new System.Drawing.Size(1063, 214);
+            this.dataGridViewReservations.Size = new System.Drawing.Size(1063, 300);
             this.dataGridViewReservations.TabIndex = 0;
             // 
             // btnComplete
             // 
-            this.btnComplete.Location = new System.Drawing.Point(189, 293);
+            this.btnComplete.Location = new System.Drawing.Point(186, 410);
             this.btnComplete.Name = "btnComplete";
             this.btnComplete.Size = new System.Drawing.Size(129, 47);
             this.btnComplete.TabIndex = 1;
@@ -60,7 +61,7 @@
             // 
             // btnCancelReservation
             // 
-            this.btnCancelReservation.Location = new System.Drawing.Point(324, 293);
+            this.btnCancelReservation.Location = new System.Drawing.Point(321, 410);
             this.btnCancelReservation.Name = "btnCancelReservation";
             this.btnCancelReservation.Size = new System.Drawing.Size(129, 47);
             this.btnCancelReservation.TabIndex = 2;
@@ -70,17 +71,17 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(594, 293);
+            this.btnClose.Location = new System.Drawing.Point(46, 541);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(115, 47);
             this.btnClose.TabIndex = 3;
-            this.btnClose.Text = "Закрыть";
+            this.btnClose.Text = "Выйти";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // butUpd
             // 
-            this.butUpd.Location = new System.Drawing.Point(459, 293);
+            this.butUpd.Location = new System.Drawing.Point(456, 410);
             this.butUpd.Name = "butUpd";
             this.butUpd.Size = new System.Drawing.Size(129, 47);
             this.butUpd.TabIndex = 4;
@@ -90,30 +91,43 @@
             // 
             // btnExpireOld
             // 
-            this.btnExpireOld.Location = new System.Drawing.Point(48, 284);
+            this.btnExpireOld.Location = new System.Drawing.Point(45, 410);
             this.btnExpireOld.Name = "btnExpireOld";
-            this.btnExpireOld.Size = new System.Drawing.Size(135, 65);
+            this.btnExpireOld.Size = new System.Drawing.Size(135, 47);
             this.btnExpireOld.TabIndex = 5;
-            this.btnExpireOld.Text = "Установить статус \"Просрочено\"";
+            this.btnExpireOld.Text = "Просрочить";
             this.btnExpireOld.UseVisualStyleBackColor = true;
             this.btnExpireOld.Click += new System.EventHandler(this.btnExpireOld_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(42, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(143, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Бронирования";
             // 
             // ReservationsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1164, 536);
+            this.ClientSize = new System.Drawing.Size(1164, 626);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnExpireOld);
             this.Controls.Add(this.butUpd);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnCancelReservation);
             this.Controls.Add(this.btnComplete);
             this.Controls.Add(this.dataGridViewReservations);
+            this.MaximizeBox = false;
             this.Name = "ReservationsForm";
             this.Text = "Бронирования";
             this.Load += new System.EventHandler(this.ReservationsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReservations)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -125,5 +139,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button butUpd;
         private System.Windows.Forms.Button btnExpireOld;
+        private System.Windows.Forms.Label label1;
     }
 }

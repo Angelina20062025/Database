@@ -21,7 +21,16 @@ namespace MusicStore
             InitializeComponent();
             connectionString = "Host=localhost; Database=MusicStore; User Id=postgres; Password=123;";
             recordId = id;
+            this.WindowState = FormWindowState.Maximized;
+            txtDescription.ReadOnly = true;
+            txtDescription.BackColor = Color.White;
+            txtDescription.Enter += (s, e) => { txtDescription.Select(0, 0); };
+            dataGridViewEnsembles.ReadOnly = true;
+            dataGridViewMembers.ReadOnly = true;
+            dataGridViewCompositions.ReadOnly = true;
+            dataGridViewPerformances.ReadOnly = true;
             LoadRecordDetails();
+            //dataGridViewMembers.Columns[dataGridViewMembers.Columns.Count - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void LoadRecordDetails()
@@ -93,13 +102,14 @@ namespace MusicStore
         {
             DataSet ds = new DataSet();
             NpgsqlCommand cmd = new NpgsqlCommand(
-                "SELECT DISTINCT p.performance_date, p.recording_location, " +
+                "SELECT c.title as composition_name, p.performance_date, p.recording_location, " +
                 "e.name as ensemble_name " +
                 "FROM shem.record_performances rp " +
                 "JOIN shem.performances p ON rp.id_performances = p.id_performances " +
                 "JOIN shem.ensembles e ON p.id_ensembles = e.id_ensembles " +
+                "JOIN shem.compositions c ON p.id_compositions = c.id_compositions " +
                 "WHERE rp.id_record = @id " +
-                "ORDER BY p.performance_date", conn);
+                "ORDER BY c.title", conn);
             cmd.Parameters.AddWithValue("id", recordId);
 
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
@@ -112,6 +122,7 @@ namespace MusicStore
                 ds.Tables["performances"].Columns["performance_date"].ColumnName = "Дата записи";
                 ds.Tables["performances"].Columns["recording_location"].ColumnName = "Место записи";
                 ds.Tables["performances"].Columns["ensemble_name"].ColumnName = "Ансамбль";
+                ds.Tables["performances"].Columns["composition_name"].ColumnName = "Композиция";
             }
         }
 
@@ -121,13 +132,12 @@ namespace MusicStore
             NpgsqlCommand cmd = new NpgsqlCommand(
                 "SELECT DISTINCT e.name as Название, " +
                 "et.name as Тип, " +
-                "e.founded_date as Основан, " +
-                "e.description as Описание " +
+                "e.founded_date as Основан " +
                 "FROM shem.record_performances rp " +
                 "JOIN shem.performances p ON rp.id_performances = p.id_performances " +
                 "JOIN shem.ensembles e ON p.id_ensembles = e.id_ensembles " +
                 "JOIN shem.ensemble_types et ON e.id_ensemble_types = et.id_ensemble_types " +
-                "WHERE rp.id_record = @id " +
+                "WHERE rp.id_record = @id AND e.is_deleted = false " +
                 "ORDER BY e.name", conn);
             cmd.Parameters.AddWithValue("id", recordId);
 
@@ -142,7 +152,7 @@ namespace MusicStore
             NpgsqlCommand cmd = new NpgsqlCommand(
                 "SELECT c.title as Название, " +
                 "g.name as Жанр, " +
-                "c.duration_seconds as Длительность, " +
+                "CONCAT(FLOOR(c.duration_seconds / 60), ' мин. ', c.duration_seconds % 60, ' сек.'  ) as Длительность, " +
                 "c.year_created as Год " +
                 "FROM shem.record_performances rp " +
                 "JOIN shem.performances p ON rp.id_performances = p.id_performances " +
@@ -160,20 +170,23 @@ namespace MusicStore
         private void LoadEnsembleMembers(NpgsqlConnection conn)
         {
             DataSet ds = new DataSet();
-            NpgsqlCommand cmd = new NpgsqlCommand(
-                "SELECT e.name as Ансамбль, " +
-                "m.first_name || ' ' || m.last_name as Музыкант, " +
-                "STRING_AGG(mr.name, ', ') as Роли " +
-                "FROM shem.record_performances rp " +
-                "JOIN shem.performances p ON rp.id_performances = p.id_performances " +
-                "JOIN shem.ensemble_members em ON p.id_ensembles = em.id_ensembles " +
-                "JOIN shem.musicians m ON em.id_musicians = m.id_musicians " +
-                "JOIN shem.ensembles e ON p.id_ensembles = e.id_ensembles " +
-                "JOIN shem.different_roles_musician drm ON m.id_musicians = drm.id_musicians " +
-                "JOIN shem.musician_roles mr ON drm.id_musician_roles = mr.id_musician_roles " +
-                "WHERE rp.id_record = @id " +
-                "GROUP BY e.name, m.first_name, m.last_name, m.id_musicians " +
-                "ORDER BY e.name, m.last_name, m.first_name", conn);
+            NpgsqlCommand cmd = new NpgsqlCommand(@"
+    SELECT DISTINCT 
+        e.name as Ансамбль,
+        m.first_name || ' ' || m.last_name as Музыкант,
+        (
+            SELECT STRING_AGG(DISTINCT mr2.name, ', ' ORDER BY mr2.name)
+            FROM shem.different_roles_musician drm2
+            JOIN shem.musician_roles mr2 ON drm2.id_musician_roles = mr2.id_musician_roles
+            WHERE drm2.id_musicians = m.id_musicians
+        ) as Роли
+    FROM shem.record_performances rp 
+    JOIN shem.performances p ON rp.id_performances = p.id_performances 
+    JOIN shem.ensemble_members em ON p.id_ensembles = em.id_ensembles 
+    JOIN shem.musicians m ON em.id_musicians = m.id_musicians 
+    JOIN shem.ensembles e ON p.id_ensembles = e.id_ensembles 
+    WHERE rp.id_record = @id AND m.is_deleted = false
+    ORDER BY e.name", conn);
             cmd.Parameters.AddWithValue("id", recordId);
 
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
@@ -184,6 +197,17 @@ namespace MusicStore
         private void RecordDetailsForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridViewPerformances_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

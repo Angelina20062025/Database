@@ -48,19 +48,6 @@ namespace MusicStore
 
                 dataGridViewReservations.DataSource = ds.Tables["reservations"];
                 dataGridViewReservations.Columns["ID"].Visible = false;
-
-                //подсветка срочных бронирований
-                foreach (DataGridViewRow row in dataGridViewReservations.Rows)
-                {
-                    if (row.Cells["Срочность"].Value?.ToString() == "СРОК ИСТЕК")
-                    {
-                        row.DefaultCellStyle.BackColor = Color.LightCoral;
-                    }
-                    else if (row.Cells["Срочность"].Value?.ToString() == "ИСТЕКАЕТ СЕГОДНЯ")
-                    {
-                        row.DefaultCellStyle.BackColor = Color.LightYellow;
-                    }
-                }
             }
             catch (Exception ex)
             {

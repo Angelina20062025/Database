@@ -20,7 +20,6 @@ namespace MusicStore
         {
             InitializeComponent();
             employeeId = empId;
-            numQuantity.ReadOnly = true;
             connectionString = "Host=localhost; Database=MusicStore; User Id=postgres; Password=123;";
             LoadComboBoxes();
             dtpReservationDate.MinDate = DateTime.Today;
@@ -51,11 +50,11 @@ namespace MusicStore
                     cmbRecord.DisplayMember = "title";
                     cmbRecord.ValueMember = "id_record";
 
-                    //загрузка клиентов
+                    //загрузка покупателей
                     DataSet dsCustomers = new DataSet();
                     NpgsqlCommand cmdCustomers = new NpgsqlCommand(
                         "SELECT id_customers, first_name || ' ' || last_name as full_name, phone " +
-                        "FROM shem.customers ORDER BY last_name", conn);
+                        "FROM shem.customers WHERE is_deleted = false ORDER BY first_name", conn);
                     NpgsqlDataAdapter daCustomers = new NpgsqlDataAdapter(cmdCustomers);
                     daCustomers.Fill(dsCustomers, "customers");
 

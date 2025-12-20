@@ -43,24 +43,26 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(280, 46);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 16);
+            this.label1.Size = new System.Drawing.Size(42, 20);
             this.label1.TabIndex = 37;
             this.label1.Text = "Тип";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(49, 120);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(49, 146);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 16);
+            this.label4.Size = new System.Drawing.Size(99, 20);
             this.label4.TabIndex = 36;
             this.label4.Text = "Описание";
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(51, 152);
+            this.txtDescription.Location = new System.Drawing.Point(52, 182);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(671, 135);
@@ -68,7 +70,7 @@
             // 
             // dtpFoundedDate
             // 
-            this.dtpFoundedDate.Location = new System.Drawing.Point(522, 77);
+            this.dtpFoundedDate.Location = new System.Drawing.Point(522, 85);
             this.dtpFoundedDate.Name = "dtpFoundedDate";
             this.dtpFoundedDate.Size = new System.Drawing.Size(200, 22);
             this.dtpFoundedDate.TabIndex = 34;
@@ -76,24 +78,26 @@
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label9.Location = new System.Drawing.Point(48, 46);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(73, 16);
+            this.label9.Size = new System.Drawing.Size(99, 20);
             this.label9.TabIndex = 33;
             this.label9.Text = "Название";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label8.Location = new System.Drawing.Point(519, 46);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(141, 16);
+            this.label8.Size = new System.Drawing.Size(202, 20);
             this.label8.TabIndex = 32;
             this.label8.Text = "Дата формирования";
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(51, 77);
+            this.txtName.Location = new System.Drawing.Point(51, 85);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(201, 22);
             this.txtName.TabIndex = 31;
@@ -101,16 +105,16 @@
             // cmbType
             // 
             this.cmbType.FormattingEnabled = true;
-            this.cmbType.Location = new System.Drawing.Point(283, 75);
+            this.cmbType.Location = new System.Drawing.Point(283, 83);
             this.cmbType.Name = "cmbType";
             this.cmbType.Size = new System.Drawing.Size(212, 24);
             this.cmbType.TabIndex = 30;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(162, 315);
+            this.btnCancel.Location = new System.Drawing.Point(176, 407);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(104, 42);
+            this.btnCancel.Size = new System.Drawing.Size(117, 42);
             this.btnCancel.TabIndex = 29;
             this.btnCancel.Text = "Выйти";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -118,9 +122,9 @@
             // 
             // btnupd
             // 
-            this.btnupd.Location = new System.Drawing.Point(52, 315);
+            this.btnupd.Location = new System.Drawing.Point(52, 407);
             this.btnupd.Name = "btnupd";
-            this.btnupd.Size = new System.Drawing.Size(104, 42);
+            this.btnupd.Size = new System.Drawing.Size(118, 42);
             this.btnupd.TabIndex = 28;
             this.btnupd.Text = "Изменить";
             this.btnupd.UseVisualStyleBackColor = true;
@@ -130,7 +134,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1061, 599);
+            this.ClientSize = new System.Drawing.Size(807, 501);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtDescription);
@@ -141,6 +145,7 @@
             this.Controls.Add(this.cmbType);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnupd);
+            this.MaximizeBox = false;
             this.Name = "EditEnsembleForm";
             this.Text = "Изменить данные ансамбля";
             this.Load += new System.EventHandler(this.EditEnsembleForm_Load);

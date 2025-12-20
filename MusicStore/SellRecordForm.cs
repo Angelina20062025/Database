@@ -34,7 +34,7 @@ namespace MusicStore
         {
             InitializeComponent();
             employeeId = empId;
-            numQuantity.ReadOnly = true;
+            //numQuantity.ReadOnly = true;
             conn = new NpgsqlConnection(connString);
             LoadComboBoxes();
             UpdateCartDisplay();
@@ -58,11 +58,11 @@ namespace MusicStore
                 cmbRecord.DisplayMember = "title";
                 cmbRecord.ValueMember = "id_record";
 
-                //загрузка клиентов
+                //загрузка покупателей
                 DataSet dsCustomers = new DataSet();
                 NpgsqlCommand cmdCustomers = new NpgsqlCommand(
                     "SELECT id_customers, first_name || ' ' || last_name as full_name " +
-                    "FROM shem.customers ORDER BY last_name", conn);
+                    "FROM shem.customers WHERE is_deleted = false ORDER BY first_name", conn);
                 NpgsqlDataAdapter daCustomers = new NpgsqlDataAdapter(cmdCustomers);
                 daCustomers.Fill(dsCustomers, "customers");
 
@@ -136,7 +136,7 @@ namespace MusicStore
 
             if (cmbCustomer.SelectedValue == null)
             {
-                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Выберите покупателя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -244,7 +244,7 @@ namespace MusicStore
         {
             try
             {
-                string receipt = "      МАГАЗИН КОМПАКТ-ДИСКОВ\n";
+                string receipt = "МАГАЗИН КОМПАКТ-ДИСКОВ\n И ВИНИЛОВЫХ ПЛАСТИНОК\n";
                 receipt += $"Номер покупки: {purchaseId}\n";
                 receipt += $"Дата: {DateTime.Now:dd.MM.yyyy HH:mm}\n\n";
 

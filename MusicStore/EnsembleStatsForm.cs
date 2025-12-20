@@ -31,7 +31,7 @@ namespace MusicStore
 
                     DataSet ds = new DataSet();
                     NpgsqlCommand cmd = new NpgsqlCommand(
-                        "SELECT name FROM shem.ensembles ORDER BY name", conn);
+                        "SELECT name FROM shem.ensembles WHERE is_deleted = false ORDER BY name", conn);
                     NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
                     da.Fill(ds, "ensembles");
 
@@ -54,7 +54,6 @@ namespace MusicStore
                 {
                     conn.Open();
 
-                    // Используем функцию get_ensemble_compositions_count
                     NpgsqlCommand cmd = new NpgsqlCommand(
                         "SELECT * FROM shem.get_ensemble_compositions_count(@ensemble)", conn);
                     cmd.Parameters.AddWithValue("ensemble", ensembleName);
@@ -82,7 +81,6 @@ namespace MusicStore
                 {
                     conn.Open();
 
-                    // Используем функцию get_ensemble_cds
                     DataSet ds = new DataSet();
                     NpgsqlCommand cmd = new NpgsqlCommand(
                         "SELECT * FROM shem.get_ensemble_cds(@ensemble)", conn);
@@ -91,7 +89,6 @@ namespace MusicStore
                     NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
                     da.Fill(ds, "cds");
 
-                    // Проверяем, не вернулось ли сообщение об ошибке
                     if (ds.Tables["cds"].Rows.Count == 1)
                     {
                         string firstRow = ds.Tables["cds"].Rows[0]["cd_title"].ToString();
@@ -104,11 +101,10 @@ namespace MusicStore
                         }
                     }
 
-                    // Переименовываем колонки
                     if (ds.Tables["cds"].Columns.Count > 0)
                     {
-                        ds.Tables["cds"].Columns["cd_title"].ColumnName = "Название диска";
-                        ds.Tables["cds"].Columns["catalog_number"].ColumnName = "Каталожный номер";
+                        ds.Tables["cds"].Columns["cd_title"].ColumnName = "Название";
+                        ds.Tables["cds"].Columns["catalog_number"].ColumnName = "Название каталога";
                         ds.Tables["cds"].Columns["release_date"].ColumnName = "Дата выпуска";
                     }
 
@@ -130,14 +126,14 @@ namespace MusicStore
                 {
                     conn.Open();
 
-                    // Дополнительная информация об ансамбле
                     NpgsqlCommand cmd = new NpgsqlCommand(
                         "SELECT e.name, et.name as type, e.founded_date, e.description, " +
-                        "COUNT(DISTINCT em.id_musicians) as musicians_count " +
+                        "COUNT(DISTINCT CASE WHEN m.is_deleted = false THEN m.id_musicians END) as musicians_count " +
                         "FROM shem.ensembles e " +
                         "JOIN shem.ensemble_types et ON e.id_ensemble_types = et.id_ensemble_types " +
                         "LEFT JOIN shem.ensemble_members em ON e.id_ensembles = em.id_ensembles " +
-                        "WHERE e.name = @ensemble " +
+                        "LEFT JOIN shem.musicians m ON em.id_musicians = m.id_musicians " +
+                        "WHERE e.name = @ensemble AND e.is_deleted = false " +
                         "GROUP BY e.id_ensembles, e.name, et.name, e.founded_date, e.description", conn);
                     cmd.Parameters.AddWithValue("ensemble", ensembleName);
 
@@ -170,8 +166,8 @@ namespace MusicStore
                     DataSet ds = new DataSet();
                     NpgsqlCommand cmd = new NpgsqlCommand(
                         "SELECT DISTINCT r.title as Название, " +
-                        "r.catalog_number as КаталожныйНомер, " +
-                        "r.release_date as Датавыпуска, " +
+                        "r.catalog_number as Каталог, " +
+                        "r.release_date as Выпуск, " +
                         "e.name as Ансамбль, " +
                         "r.retail_price as Цена " +
                         "FROM shem.record r " +

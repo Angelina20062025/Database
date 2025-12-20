@@ -22,6 +22,7 @@ namespace MusicStore
             InitializeComponent();
             string connString = "Host=localhost; Database=MusicStore; User Id=postgres; Password=123;";
             conn = new NpgsqlConnection(connString);
+            this.WindowState = FormWindowState.Maximized;
             LoadInitialData();
         }
 
@@ -36,27 +37,41 @@ namespace MusicStore
             btnLogin.Text = currentUserRole == "guest" ? "Авторизоваться" : "Выйти";
             btnAddRecord.Visible = (currentUserRole == "admin");
             btnEditRecord.Visible = (currentUserRole == "admin");
-            btnDeleteRecord.Visible = (currentUserRole == "admin");
             btnArcRecord.Visible = (currentUserRole == "admin");
             btnEnsembles.Visible = (currentUserRole == "admin");
+            butCust.Visible = (currentUserRole == "admin");
+            buttMus.Visible = (currentUserRole == "admin");
             btnSell.Visible = (currentUserRole == "seller");
             btnReserve.Visible = (currentUserRole == "seller");
             btnViewReservations.Visible = (currentUserRole == "seller");
+            buttAddCust.Visible = (currentUserRole == "seller");
 
             if (currentUserRole == "admin")
             {
                 lblUserInfo.Text = "Вы вошли как: администратор";
                 lblUserInfo.Visible = true;
+
+                lblAdm.Visible = true;
+                lblSell.Visible = false;
+                lblTov.Visible = true;
             }
             else if (currentUserRole == "seller")
             {
                 lblUserInfo.Text = "Вы вошли как: сотрудник";
                 lblUserInfo.Visible = true;
+
+                lblAdm.Visible = false;
+                lblSell.Visible = true;
+                lblTov.Visible = false;
             }
             else
             {
                 lblUserInfo.Text = "Вы вошли как: гость";
                 lblUserInfo.Visible = true;
+
+                lblAdm.Visible = false;
+                lblSell.Visible = false;
+                lblTov.Visible = false;
             }
         }
 
@@ -142,7 +157,8 @@ namespace MusicStore
                     "r.wholesale_price as \"Оптовая_цена_(руб.)\", r.retail_price as \"Розничная_цена_(руб.)\", " +
                     "r.remaining_quantity as \"Количество_в_наличии_(шт.)\" " +
                     "FROM shem.record r " +
-                    "ORDER BY r.is_deleted", conn);
+                    "WHERE r.is_deleted = false " +
+                    "ORDER BY r.title", conn);
 
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
                 da.Fill(ds, "records");
@@ -177,40 +193,6 @@ namespace MusicStore
                 EditRecordForm editForm = new EditRecordForm(recordId);
                 editForm.ShowDialog();
                 LoadDetailedCatalog();
-            }
-        }
-
-        private void btnDeleteRecord_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.CurrentRow != null)
-            {
-                int recordId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id record"].Value);
-
-                DialogResult result = MessageBox.Show(
-                    "Вы уверены, что хотите удалить эту пластинку, а также записи о её покупках и бронированиях?",
-                    "Подтверждение удаления",
-                    MessageBoxButtons.YesNo);
-
-                if (result == DialogResult.Yes)
-                {
-                    try
-                    {
-                        conn.Open();
-                        NpgsqlCommand cmd = new NpgsqlCommand(
-                            "CALL shem.delete_record(@id)", conn);
-                        cmd.Parameters.AddWithValue("id", recordId);
-                        cmd.ExecuteNonQuery();
-                        conn.Close();
-
-                        MessageBox.Show("Запись удалена успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadDetailedCatalog();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Ошибка удаления: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        conn.Close();
-                    }
-                }
             }
         }
 
@@ -313,7 +295,7 @@ namespace MusicStore
                 conn.Open();
                 DataSet ds = new DataSet();
 
-                NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM shem.get_sales_leaders(5)", conn);
+                NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM shem.get_sales_leaders()", conn);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
                 da.Fill(ds, "leaders");
 
@@ -421,8 +403,8 @@ namespace MusicStore
                 int recordId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id record"].Value);
 
                 DialogResult result = MessageBox.Show(
-                    "Вы уверены, что хотите архивировать эту запись?",
-                    "Подтверждение архивации",
+                    "Вы уверены, что хотите удалить эту запись?",
+                    "Подтверждение",
                     MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
@@ -474,6 +456,30 @@ namespace MusicStore
         private void btnEnsembles_Click(object sender, EventArgs e)
         {
             EnsemblesManagementForm form = new EnsemblesManagementForm();
+            form.ShowDialog();
+        }
+
+        private void butCust_Click(object sender, EventArgs e)
+        {
+            CustomersForm form = new CustomersForm();
+            form.ShowDialog();
+        }
+
+        private void buttAddCust_Click(object sender, EventArgs e)
+        {
+            CustomersFormSeller form = new CustomersFormSeller();
+            form.ShowDialog();
+        }
+
+        private void buttMus_Click(object sender, EventArgs e)
+        {
+            MusiciansForm form = new MusiciansForm();
+            form.ShowDialog();
+        }
+
+        private void buttComp_Click(object sender, EventArgs e)
+        {
+            CompositionsForm form = new CompositionsForm();
             form.ShowDialog();
         }
     }
