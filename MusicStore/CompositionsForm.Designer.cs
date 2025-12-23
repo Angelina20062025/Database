@@ -42,6 +42,9 @@
             this.numDuration = new System.Windows.Forms.NumericUpDown();
             this.numYear = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.buttUpd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDuration)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).BeginInit();
@@ -59,7 +62,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(326, 337);
+            this.btnCancel.Location = new System.Drawing.Point(51, 435);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(134, 46);
             this.btnCancel.TabIndex = 12;
@@ -69,25 +72,27 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(186, 337);
+            this.btnDelete.Location = new System.Drawing.Point(190, 337);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(134, 46);
             this.btnDelete.TabIndex = 11;
             this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(46, 337);
+            this.btnEdit.Location = new System.Drawing.Point(50, 337);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(134, 46);
             this.btnEdit.TabIndex = 10;
             this.btnEdit.Text = "Редактировать";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(933, 375);
+            this.btnAdd.Location = new System.Drawing.Point(981, 374);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(134, 46);
             this.btnAdd.TabIndex = 9;
@@ -110,7 +115,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(930, 114);
+            this.label2.Location = new System.Drawing.Point(978, 113);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 20);
             this.label2.TabIndex = 33;
@@ -120,7 +125,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(930, 38);
+            this.label9.Location = new System.Drawing.Point(978, 37);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(99, 20);
             this.label9.TabIndex = 31;
@@ -130,7 +135,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(929, 194);
+            this.label8.Location = new System.Drawing.Point(977, 193);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(138, 20);
             this.label8.TabIndex = 30;
@@ -138,7 +143,7 @@
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(933, 71);
+            this.txtTitle.Location = new System.Drawing.Point(981, 70);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(201, 22);
             this.txtTitle.TabIndex = 29;
@@ -146,21 +151,21 @@
             // cmbGenre
             // 
             this.cmbGenre.FormattingEnabled = true;
-            this.cmbGenre.Location = new System.Drawing.Point(934, 147);
+            this.cmbGenre.Location = new System.Drawing.Point(982, 146);
             this.cmbGenre.Name = "cmbGenre";
             this.cmbGenre.Size = new System.Drawing.Size(200, 24);
             this.cmbGenre.TabIndex = 28;
             // 
             // numDuration
             // 
-            this.numDuration.Location = new System.Drawing.Point(934, 319);
+            this.numDuration.Location = new System.Drawing.Point(982, 318);
             this.numDuration.Name = "numDuration";
             this.numDuration.Size = new System.Drawing.Size(200, 22);
             this.numDuration.TabIndex = 34;
             // 
             // numYear
             // 
-            this.numYear.Location = new System.Drawing.Point(933, 235);
+            this.numYear.Location = new System.Drawing.Point(981, 234);
             this.numYear.Name = "numYear";
             this.numYear.Size = new System.Drawing.Size(201, 22);
             this.numYear.TabIndex = 35;
@@ -169,17 +174,47 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(930, 281);
+            this.label3.Location = new System.Drawing.Point(978, 280);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(264, 20);
             this.label3.TabIndex = 36;
             this.label3.Text = "Длительность (в секундах)";
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(470, 337);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(134, 46);
+            this.btnSearch.TabIndex = 37;
+            this.btnSearch.Text = "Найти по названию...";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(610, 349);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(262, 22);
+            this.txtSearch.TabIndex = 38;
+            // 
+            // buttUpd
+            // 
+            this.buttUpd.Location = new System.Drawing.Point(330, 337);
+            this.buttUpd.Name = "buttUpd";
+            this.buttUpd.Size = new System.Drawing.Size(134, 46);
+            this.buttUpd.TabIndex = 39;
+            this.buttUpd.Text = "Обновить";
+            this.buttUpd.UseVisualStyleBackColor = true;
+            this.buttUpd.Click += new System.EventHandler(this.buttUpd_Click);
+            // 
             // CompositionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1215, 459);
+            this.ClientSize = new System.Drawing.Size(1283, 512);
+            this.Controls.Add(this.buttUpd);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.numYear);
             this.Controls.Add(this.numDuration);
@@ -222,5 +257,8 @@
         private System.Windows.Forms.NumericUpDown numDuration;
         private System.Windows.Forms.NumericUpDown numYear;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button buttUpd;
     }
 }

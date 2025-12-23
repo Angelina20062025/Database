@@ -1,6 +1,6 @@
 ﻿namespace MusicStore
 {
-    partial class EmployeesForm
+    partial class EditEmployeesForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbRole = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -37,179 +39,133 @@
             this.txtPatronymic = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.cmbRole = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Location = new System.Drawing.Point(57, 425);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(208, 20);
+            this.label7.TabIndex = 51;
+            this.label7.Text = "* Обязательные поля";
+            // 
+            // cmbRole
+            // 
+            this.cmbRole.FormattingEnabled = true;
+            this.cmbRole.Location = new System.Drawing.Point(313, 268);
+            this.cmbRole.Name = "cmbRole";
+            this.cmbRole.Size = new System.Drawing.Size(210, 24);
+            this.cmbRole.TabIndex = 50;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(844, 134);
+            this.label6.Location = new System.Drawing.Point(57, 136);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(107, 20);
-            this.label6.TabIndex = 37;
+            this.label6.TabIndex = 49;
             this.label6.Text = "Фамилия *";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(844, 227);
+            this.label5.Location = new System.Drawing.Point(57, 229);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(99, 20);
-            this.label5.TabIndex = 36;
+            this.label5.TabIndex = 48;
             this.label5.Text = "Отчество";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(1096, 134);
+            this.label4.Location = new System.Drawing.Point(309, 136);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 20);
-            this.label4.TabIndex = 35;
+            this.label4.TabIndex = 47;
             this.label4.Text = "Телефон *";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(1096, 227);
+            this.label3.Location = new System.Drawing.Point(309, 229);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 20);
-            this.label3.TabIndex = 34;
+            this.label3.TabIndex = 46;
             this.label3.Text = "Роль *";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(844, 42);
+            this.label2.Location = new System.Drawing.Point(57, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 20);
-            this.label2.TabIndex = 33;
+            this.label2.TabIndex = 45;
             this.label2.Text = "Имя *";
             // 
             // txtLastName
             // 
-            this.txtLastName.Location = new System.Drawing.Point(848, 173);
+            this.txtLastName.Location = new System.Drawing.Point(61, 175);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(210, 22);
-            this.txtLastName.TabIndex = 32;
+            this.txtLastName.TabIndex = 44;
             // 
             // txtPatronymic
             // 
-            this.txtPatronymic.Location = new System.Drawing.Point(848, 268);
+            this.txtPatronymic.Location = new System.Drawing.Point(61, 270);
             this.txtPatronymic.Name = "txtPatronymic";
             this.txtPatronymic.Size = new System.Drawing.Size(210, 22);
-            this.txtPatronymic.TabIndex = 31;
+            this.txtPatronymic.TabIndex = 43;
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(1100, 173);
+            this.txtPhone.Location = new System.Drawing.Point(313, 175);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(210, 22);
-            this.txtPhone.TabIndex = 30;
+            this.txtPhone.TabIndex = 42;
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(848, 85);
+            this.txtName.Location = new System.Drawing.Point(61, 87);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(210, 22);
-            this.txtName.TabIndex = 28;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(39, 42);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 20);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "Сотрудники";
+            this.txtName.TabIndex = 41;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(331, 341);
+            this.btnCancel.Location = new System.Drawing.Point(206, 332);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(139, 46);
-            this.btnCancel.TabIndex = 26;
+            this.btnCancel.TabIndex = 54;
             this.btnCancel.Text = "Выйти";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(186, 341);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(139, 46);
-            this.btnDelete.TabIndex = 25;
-            this.btnDelete.Text = "Удалить";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(41, 341);
+            this.btnEdit.Location = new System.Drawing.Point(61, 332);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(139, 46);
-            this.btnEdit.TabIndex = 24;
-            this.btnEdit.Text = "Редактировать";
+            this.btnEdit.TabIndex = 52;
+            this.btnEdit.Text = "Изменить";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(848, 331);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(139, 46);
-            this.btnAdd.TabIndex = 23;
-            this.btnAdd.Text = "Добавить";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(42, 85);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(759, 223);
-            this.dataGridView1.TabIndex = 22;
-            // 
-            // cmbRole
-            // 
-            this.cmbRole.FormattingEnabled = true;
-            this.cmbRole.Location = new System.Drawing.Point(1100, 266);
-            this.cmbRole.Name = "cmbRole";
-            this.cmbRole.Size = new System.Drawing.Size(210, 24);
-            this.cmbRole.TabIndex = 38;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(844, 423);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(208, 20);
-            this.label7.TabIndex = 39;
-            this.label7.Text = "* Обязательные поля";
-            // 
-            // EmployeesForm
+            // EditEmployeesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1366, 496);
+            this.ClientSize = new System.Drawing.Size(599, 496);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cmbRole);
             this.Controls.Add(this.label6);
@@ -221,17 +177,9 @@
             this.Controls.Add(this.txtPatronymic);
             this.Controls.Add(this.txtPhone);
             this.Controls.Add(this.txtName);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.dataGridView1);
             this.MaximizeBox = false;
-            this.Name = "EmployeesForm";
-            this.Text = "Управлять сотрудниками";
-            this.Load += new System.EventHandler(this.EmployeesForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Name = "EditEmployeesForm";
+            this.Text = "Изменить данные о сотруднике";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,6 +187,8 @@
 
         #endregion
 
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbRole;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -248,13 +198,7 @@
         private System.Windows.Forms.TextBox txtPatronymic;
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ComboBox cmbRole;
-        private System.Windows.Forms.Label label7;
     }
 }

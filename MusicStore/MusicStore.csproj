@@ -110,11 +110,23 @@
     <Compile Include="CustomersFormSeller.Designer.cs">
       <DependentUpon>CustomersFormSeller.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditCompositionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCompositionForm.Designer.cs">
+      <DependentUpon>EditCompositionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditCustomersForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditCustomersForm.Designer.cs">
       <DependentUpon>EditCustomersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditEmployeesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditEmployeesForm.Designer.cs">
+      <DependentUpon>EditEmployeesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="EditEnsembleForm.cs">
       <SubType>Form</SubType>
@@ -128,11 +140,41 @@
     <Compile Include="EditMusicianForm.Designer.cs">
       <DependentUpon>EditMusicianForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditPerformanceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditPerformanceForm.Designer.cs">
+      <DependentUpon>EditPerformanceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditPurchaseDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditPurchaseDetailForm.Designer.cs">
+      <DependentUpon>EditPurchaseDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditPurchaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditPurchaseForm.Designer.cs">
+      <DependentUpon>EditPurchaseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditRecordForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditRecordForm.Designer.cs">
       <DependentUpon>EditRecordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditReservationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditReservationForm.Designer.cs">
+      <DependentUpon>EditReservationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditUserForm.Designer.cs">
+      <DependentUpon>EditUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="EmployeesForm.cs">
       <SubType>Form</SubType>
@@ -158,6 +200,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormImageEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormImageEditor.Designer.cs">
+      <DependentUpon>FormImageEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,8 +218,26 @@
     <Compile Include="MusiciansForm.Designer.cs">
       <DependentUpon>MusiciansForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PerformancesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PerformancesForm.Designer.cs">
+      <DependentUpon>PerformancesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PurchaseDetailsForm.Designer.cs">
+      <DependentUpon>PurchaseDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PurchasesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PurchasesForm.Designer.cs">
+      <DependentUpon>PurchasesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RecordDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +250,12 @@
     <Compile Include="ReservationsForm.Designer.cs">
       <DependentUpon>ReservationsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReservationsManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReservationsManagementForm.Designer.cs">
+      <DependentUpon>ReservationsManagementForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReserveRecordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +267,12 @@
     </Compile>
     <Compile Include="SellRecordForm.Designer.cs">
       <DependentUpon>SellRecordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersForm.Designer.cs">
+      <DependentUpon>UsersForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AddEnsembleForm.resx">
       <DependentUpon>AddEnsembleForm.cs</DependentUpon>
@@ -211,8 +289,14 @@
     <EmbeddedResource Include="CustomersFormSeller.resx">
       <DependentUpon>CustomersFormSeller.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditCompositionForm.resx">
+      <DependentUpon>EditCompositionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditCustomersForm.resx">
       <DependentUpon>EditCustomersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditEmployeesForm.resx">
+      <DependentUpon>EditEmployeesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditEnsembleForm.resx">
       <DependentUpon>EditEnsembleForm.cs</DependentUpon>
@@ -220,8 +304,23 @@
     <EmbeddedResource Include="EditMusicianForm.resx">
       <DependentUpon>EditMusicianForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditPerformanceForm.resx">
+      <DependentUpon>EditPerformanceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditPurchaseDetailForm.resx">
+      <DependentUpon>EditPurchaseDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditPurchaseForm.resx">
+      <DependentUpon>EditPurchaseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditRecordForm.resx">
       <DependentUpon>EditRecordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditReservationForm.resx">
+      <DependentUpon>EditReservationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditUserForm.resx">
+      <DependentUpon>EditUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EmployeesForm.resx">
       <DependentUpon>EmployeesForm.cs</DependentUpon>
@@ -235,11 +334,17 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormImageEditor.resx">
+      <DependentUpon>FormImageEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MusiciansForm.resx">
       <DependentUpon>MusiciansForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PerformancesForm.resx">
+      <DependentUpon>PerformancesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -250,17 +355,29 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PurchaseDetailsForm.resx">
+      <DependentUpon>PurchaseDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PurchasesForm.resx">
+      <DependentUpon>PurchasesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RecordDetailsForm.resx">
       <DependentUpon>RecordDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReservationsForm.resx">
       <DependentUpon>ReservationsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReservationsManagementForm.resx">
+      <DependentUpon>ReservationsManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReserveRecordForm.resx">
       <DependentUpon>ReserveRecordForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SellRecordForm.resx">
       <DependentUpon>SellRecordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsersForm.resx">
+      <DependentUpon>UsersForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

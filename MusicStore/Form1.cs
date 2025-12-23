@@ -41,6 +41,15 @@ namespace MusicStore
             btnEnsembles.Visible = (currentUserRole == "admin");
             butCust.Visible = (currentUserRole == "admin");
             buttMus.Visible = (currentUserRole == "admin");
+            buttComp.Visible = (currentUserRole == "admin");
+            btnEmployees.Visible = (currentUserRole == "admin");
+            butUsers.Visible = (currentUserRole == "admin");
+            butPerfom.Visible = (currentUserRole == "admin");
+            butPurchases.Visible = (currentUserRole == "admin");
+            butReserv.Visible = (currentUserRole == "admin");
+            label3.Visible = (currentUserRole == "admin");
+            label4.Visible = (currentUserRole == "admin");
+            butCover.Visible = (currentUserRole == "admin");
             btnSell.Visible = (currentUserRole == "seller");
             btnReserve.Visible = (currentUserRole == "seller");
             btnViewReservations.Visible = (currentUserRole == "seller");
@@ -481,6 +490,49 @@ namespace MusicStore
         {
             CompositionsForm form = new CompositionsForm();
             form.ShowDialog();
+        }
+
+        private void btnEmployees_Click(object sender, EventArgs e)
+        {
+            EmployeesForm form = new EmployeesForm();
+            form.ShowDialog();
+        }
+
+        private void butUsers_Click(object sender, EventArgs e)
+        {
+            UsersForm form = new UsersForm();
+            form.ShowDialog();
+        }
+
+        private void butPerfom_Click(object sender, EventArgs e)
+        {
+            PerformancesForm form = new PerformancesForm();
+            form.ShowDialog();
+        }
+
+        private void butPurchases_Click(object sender, EventArgs e)
+        {
+            PurchasesForm form = new PurchasesForm();
+            form.ShowDialog();
+            LoadDetailedCatalog();
+        }
+
+        private void butReserv_Click(object sender, EventArgs e)
+        {
+            ReservationsManagementForm form = new ReservationsManagementForm();
+            form.ShowDialog();
+        }
+
+        private void butCover_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                int recordId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id record"].Value);
+                string recordTitle = dataGridView1.CurrentRow.Cells["Название диска"].Value.ToString();
+
+                FormImageEditor imageEditor = new FormImageEditor(recordId, recordTitle);
+                imageEditor.ShowDialog();
+            }
         }
     }
 }

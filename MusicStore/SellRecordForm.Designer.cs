@@ -256,7 +256,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(931, 683);
+            this.ClientSize = new System.Drawing.Size(931, 651);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.listViewCart);
             this.Controls.Add(this.btnClearCart);

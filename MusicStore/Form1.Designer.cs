@@ -55,6 +55,14 @@
             this.buttAddCust = new System.Windows.Forms.Button();
             this.buttMus = new System.Windows.Forms.Button();
             this.buttComp = new System.Windows.Forms.Button();
+            this.btnEmployees = new System.Windows.Forms.Button();
+            this.butUsers = new System.Windows.Forms.Button();
+            this.butPerfom = new System.Windows.Forms.Button();
+            this.butPurchases = new System.Windows.Forms.Button();
+            this.butReserv = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.butCover = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,7 +91,7 @@
             // btnAddRecord
             // 
             this.btnAddRecord.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnAddRecord.Location = new System.Drawing.Point(1149, 121);
+            this.btnAddRecord.Location = new System.Drawing.Point(1160, 177);
             this.btnAddRecord.Name = "btnAddRecord";
             this.btnAddRecord.Size = new System.Drawing.Size(147, 49);
             this.btnAddRecord.TabIndex = 3;
@@ -94,7 +102,7 @@
             // btnEditRecord
             // 
             this.btnEditRecord.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnEditRecord.Location = new System.Drawing.Point(1151, 176);
+            this.btnEditRecord.Location = new System.Drawing.Point(1162, 232);
             this.btnEditRecord.Name = "btnEditRecord";
             this.btnEditRecord.Size = new System.Drawing.Size(147, 47);
             this.btnEditRecord.TabIndex = 4;
@@ -233,7 +241,7 @@
             // btnArcRecord
             // 
             this.btnArcRecord.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnArcRecord.Location = new System.Drawing.Point(1149, 229);
+            this.btnArcRecord.Location = new System.Drawing.Point(1160, 285);
             this.btnArcRecord.Name = "btnArcRecord";
             this.btnArcRecord.Size = new System.Drawing.Size(147, 47);
             this.btnArcRecord.TabIndex = 18;
@@ -244,7 +252,7 @@
             // btnEnsembles
             // 
             this.btnEnsembles.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnEnsembles.Location = new System.Drawing.Point(1302, 121);
+            this.btnEnsembles.Location = new System.Drawing.Point(1316, 593);
             this.btnEnsembles.Name = "btnEnsembles";
             this.btnEnsembles.Size = new System.Drawing.Size(146, 46);
             this.btnEnsembles.TabIndex = 19;
@@ -255,7 +263,7 @@
             // butCust
             // 
             this.butCust.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.butCust.Location = new System.Drawing.Point(1302, 176);
+            this.butCust.Location = new System.Drawing.Point(1163, 418);
             this.butCust.Name = "butCust";
             this.butCust.Size = new System.Drawing.Size(146, 47);
             this.butCust.TabIndex = 20;
@@ -301,7 +309,7 @@
             this.lblAdm.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAdm.AutoSize = true;
             this.lblAdm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblAdm.Location = new System.Drawing.Point(1146, 41);
+            this.lblAdm.Location = new System.Drawing.Point(1156, 88);
             this.lblAdm.Name = "lblAdm";
             this.lblAdm.Size = new System.Drawing.Size(223, 25);
             this.lblAdm.TabIndex = 24;
@@ -312,7 +320,7 @@
             this.lblTov.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblTov.AutoSize = true;
             this.lblTov.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblTov.Location = new System.Drawing.Point(1147, 85);
+            this.lblTov.Location = new System.Drawing.Point(1158, 141);
             this.lblTov.Name = "lblTov";
             this.lblTov.Size = new System.Drawing.Size(71, 20);
             this.lblTov.TabIndex = 25;
@@ -332,7 +340,7 @@
             // buttMus
             // 
             this.buttMus.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttMus.Location = new System.Drawing.Point(1303, 230);
+            this.buttMus.Location = new System.Drawing.Point(1160, 593);
             this.buttMus.Name = "buttMus";
             this.buttMus.Size = new System.Drawing.Size(145, 46);
             this.buttMus.TabIndex = 27;
@@ -343,7 +351,7 @@
             // buttComp
             // 
             this.buttComp.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttComp.Location = new System.Drawing.Point(1151, 282);
+            this.buttComp.Location = new System.Drawing.Point(1162, 648);
             this.buttComp.Name = "buttComp";
             this.buttComp.Size = new System.Drawing.Size(147, 46);
             this.buttComp.TabIndex = 28;
@@ -351,11 +359,107 @@
             this.buttComp.UseVisualStyleBackColor = true;
             this.buttComp.Click += new System.EventHandler(this.buttComp_Click);
             // 
+            // btnEmployees
+            // 
+            this.btnEmployees.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnEmployees.Location = new System.Drawing.Point(1319, 418);
+            this.btnEmployees.Name = "btnEmployees";
+            this.btnEmployees.Size = new System.Drawing.Size(144, 46);
+            this.btnEmployees.TabIndex = 29;
+            this.btnEmployees.Text = "Управлять сотрудниками";
+            this.btnEmployees.UseVisualStyleBackColor = true;
+            this.btnEmployees.Click += new System.EventHandler(this.btnEmployees_Click);
+            // 
+            // butUsers
+            // 
+            this.butUsers.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.butUsers.Location = new System.Drawing.Point(1319, 470);
+            this.butUsers.Name = "butUsers";
+            this.butUsers.Size = new System.Drawing.Size(144, 46);
+            this.butUsers.TabIndex = 30;
+            this.butUsers.Text = "Управлять пользователями";
+            this.butUsers.UseVisualStyleBackColor = true;
+            this.butUsers.Click += new System.EventHandler(this.butUsers_Click);
+            // 
+            // butPerfom
+            // 
+            this.butPerfom.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.butPerfom.Location = new System.Drawing.Point(1316, 648);
+            this.butPerfom.Name = "butPerfom";
+            this.butPerfom.Size = new System.Drawing.Size(147, 45);
+            this.butPerfom.TabIndex = 31;
+            this.butPerfom.Text = "Управлять исполнениями";
+            this.butPerfom.UseVisualStyleBackColor = true;
+            this.butPerfom.Click += new System.EventHandler(this.butPerfom_Click);
+            // 
+            // butPurchases
+            // 
+            this.butPurchases.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.butPurchases.Location = new System.Drawing.Point(1314, 177);
+            this.butPurchases.Name = "butPurchases";
+            this.butPurchases.Size = new System.Drawing.Size(147, 49);
+            this.butPurchases.TabIndex = 33;
+            this.butPurchases.Text = "Управлять покупками";
+            this.butPurchases.UseVisualStyleBackColor = true;
+            this.butPurchases.Click += new System.EventHandler(this.butPurchases_Click);
+            // 
+            // butReserv
+            // 
+            this.butReserv.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.butReserv.Location = new System.Drawing.Point(1317, 232);
+            this.butReserv.Name = "butReserv";
+            this.butReserv.Size = new System.Drawing.Size(144, 47);
+            this.butReserv.TabIndex = 34;
+            this.butReserv.Text = "Управлять бронированиями";
+            this.butReserv.UseVisualStyleBackColor = true;
+            this.butReserv.Click += new System.EventHandler(this.butReserv_Click);
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(1161, 374);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 20);
+            this.label3.TabIndex = 35;
+            this.label3.Text = "Люди";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(1156, 543);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(145, 20);
+            this.label4.TabIndex = 36;
+            this.label4.Text = "Другие таблицы";
+            // 
+            // butCover
+            // 
+            this.butCover.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.butCover.Location = new System.Drawing.Point(1319, 286);
+            this.butCover.Name = "butCover";
+            this.butCover.Size = new System.Drawing.Size(142, 46);
+            this.butCover.TabIndex = 37;
+            this.butCover.Text = "Управлять обложками";
+            this.butCover.UseVisualStyleBackColor = true;
+            this.butCover.Click += new System.EventHandler(this.butCover_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1549, 1055);
+            this.Controls.Add(this.butCover);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.butReserv);
+            this.Controls.Add(this.butPurchases);
+            this.Controls.Add(this.butPerfom);
+            this.Controls.Add(this.butUsers);
+            this.Controls.Add(this.btnEmployees);
             this.Controls.Add(this.buttComp);
             this.Controls.Add(this.buttMus);
             this.Controls.Add(this.buttAddCust);
@@ -421,6 +525,14 @@
         private System.Windows.Forms.Button buttAddCust;
         private System.Windows.Forms.Button buttMus;
         private System.Windows.Forms.Button buttComp;
+        private System.Windows.Forms.Button btnEmployees;
+        private System.Windows.Forms.Button butUsers;
+        private System.Windows.Forms.Button butPerfom;
+        private System.Windows.Forms.Button butPurchases;
+        private System.Windows.Forms.Button butReserv;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button butCover;
     }
 }
 

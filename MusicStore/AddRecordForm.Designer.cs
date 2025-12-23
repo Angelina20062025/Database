@@ -216,7 +216,7 @@
             this.Controls.Add(this.btnAdd);
             this.MaximizeBox = false;
             this.Name = "AddRecordForm";
-            this.Text = "Добавить диск";
+            this.Text = "Добавить пластинку";
             this.Load += new System.EventHandler(this.AddRecordForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numWholesalePrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRetailPrice)).EndInit();

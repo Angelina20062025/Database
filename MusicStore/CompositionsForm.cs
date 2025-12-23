@@ -172,5 +172,116 @@ namespace MusicStore
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                int compositionId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id_compositions"].Value);
+                EditCompositionForm editForm = new EditCompositionForm(compositionId);
+                if (editForm.ShowDialog() == DialogResult.OK)
+                LoadCompositions();
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string searchTerm = txtSearch.Text.Trim();
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                SearchCompositions(searchTerm);
+            }
+        }
+
+        private void SearchCompositions(string searchTerm)
+        {
+            try
+            {
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+
+                DataSet ds = new DataSet();
+                NpgsqlCommand cmd = new NpgsqlCommand(
+                    "SELECT c.id_compositions, c.title, g.name as genre, " +
+                    "CONCAT(FLOOR(c.duration_seconds / 60), ' мин. ', c.duration_seconds % 60, ' сек.'  ) as Длительность, c.year_created " +
+                    "FROM shem.compositions c " +
+                    "JOIN shem.genres g ON c.id_genres = g.id_genres " +
+                    "WHERE c.is_deleted = false AND " +
+                    "(c.title ILIKE @search) " +
+                    "ORDER BY c.title", conn);
+
+                cmd.Parameters.AddWithValue("@search", "%" + searchTerm + "%");
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+                da.Fill(ds, "compositions");
+                dataGridView1.DataSource = ds.Tables["compositions"];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка поиска: " + ex.Message);
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                    conn.Close();
+            }
+        }
+
+        private void buttUpd_Click(object sender, EventArgs e)
+        {
+            LoadCompositions();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                int compositionId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["id_compositions"].Value);
+
+                DialogResult result = MessageBox.Show(
+                    $"Вы уверены, что хотите удалить композицию?",
+                    "Подтверждение",
+                    MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        conn.Open();
+                        NpgsqlCommand cmd = new NpgsqlCommand(
+                            "SELECT * FROM shem.soft_delete_composition(@id)", conn);
+                        cmd.Parameters.AddWithValue("@id", compositionId);
+
+                        using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                bool success = reader.GetBoolean(0);
+                                string message = reader.GetString(1);
+
+                                if (success)
+                                {
+                                    MessageBox.Show(message, "Архивация успешна",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show(message, "Невозможно архивировать",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    conn.Close();
+                                    return;
+                                }
+                            }
+                        }
+                        conn.Close();
+                        LoadCompositions();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ошибка архивации: " + ex.Message);
+                        conn.Close();
+                    }
+                }
+            }
+        }
     }
 }

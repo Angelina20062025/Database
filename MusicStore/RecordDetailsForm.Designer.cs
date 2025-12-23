@@ -52,7 +52,7 @@
             // 
             this.picCover.Location = new System.Drawing.Point(47, 137);
             this.picCover.Name = "picCover";
-            this.picCover.Size = new System.Drawing.Size(400, 400);
+            this.picCover.Size = new System.Drawing.Size(428, 433);
             this.picCover.TabIndex = 0;
             this.picCover.TabStop = false;
             // 

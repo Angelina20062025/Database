@@ -52,7 +52,7 @@ namespace MusicStore
                     FROM shem.users u
                     JOIN shem.employees e ON u.id_employees = e.id_employees
                     JOIN shem.employee_roles er ON e.id_employee_roles = er.id_employee_roles
-                    WHERE u.login = @login";
+                    WHERE u.login = @login AND u.is_deleted = false";
 
                 NpgsqlCommand cmd = new NpgsqlCommand(checkUserQuery, conn);
                 cmd.Parameters.AddWithValue("login", login);

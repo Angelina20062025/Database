@@ -19,6 +19,7 @@ namespace MusicStore
         public RecordDetailsForm(int id)
         {
             InitializeComponent();
+            picCover.SizeMode = PictureBoxSizeMode.Zoom;
             connectionString = "Host=localhost; Database=MusicStore; User Id=postgres; Password=123;";
             recordId = id;
             this.WindowState = FormWindowState.Maximized;
@@ -108,7 +109,7 @@ namespace MusicStore
                 "JOIN shem.performances p ON rp.id_performances = p.id_performances " +
                 "JOIN shem.ensembles e ON p.id_ensembles = e.id_ensembles " +
                 "JOIN shem.compositions c ON p.id_compositions = c.id_compositions " +
-                "WHERE rp.id_record = @id " +
+                "WHERE rp.id_record = @id AND p.is_deleted = false " +
                 "ORDER BY c.title", conn);
             cmd.Parameters.AddWithValue("id", recordId);
 
@@ -158,7 +159,7 @@ namespace MusicStore
                 "JOIN shem.performances p ON rp.id_performances = p.id_performances " +
                 "JOIN shem.compositions c ON p.id_compositions = c.id_compositions " +
                 "JOIN shem.genres g ON c.id_genres = g.id_genres " +
-                "WHERE rp.id_record = @id " +
+                "WHERE rp.id_record = @id AND c.is_deleted = false " +
                 "ORDER BY c.title", conn);
             cmd.Parameters.AddWithValue("id", recordId);
 
