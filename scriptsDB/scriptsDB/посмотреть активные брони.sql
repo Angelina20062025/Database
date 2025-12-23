@@ -1,1 +1,0 @@
-SELECT * FROM shem.reservations_view WHERE status = 'Активно';

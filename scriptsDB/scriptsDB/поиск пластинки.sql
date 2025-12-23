@@ -1,1 +1,0 @@
-SELECT * FROM shem.search_cds('The');
